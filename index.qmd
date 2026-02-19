@@ -1,0 +1,37 @@
+---
+title: "Pilot DB with Mareano"
+subtitle: A pilot study to evaluate the dabase structure using Mareano Chemical Data 
+---
+
+The site contains the initial version of the database design and its potential applications using the publicly available [Mareano](https://www.mareano.no/) data set.
+
+## Pipeline
+The database will be a central part of the project to identify background sediment cores/samples. From the database, dedicated APIs should be implemented to maintain the data with both read and write access, while exported tabular files should be used for data exploration and the main data analysis. As the goal of the project, the result should be submitted to EFSA by exporting the identified segments in the EFSA format.
+
+![](./image/mareano_pilot.png)
+
+## Source Data
+
+ * Chemical data page at Mareano: [Chemical data: NGU and IMR](https://www.mareano.no/en/maps-and-data/chemical-data)
+ 
+ From the downloaded `ods` file, the data from `INFO` and `INORGANIC` sheets were used to create the pilot database.
+
+## Database Design and Creation
+
+After creating the ER (Entity Relationship) diagram, the tables were created in a single SQLite file with five tables. All required data were extracted from the Mareano tabular file and imported to the associated tables.
+
+ * See the [DB Schema](./db-schema.qmd) page for details of the DB architecture.
+ * See the [Incorrect Data](./incorrect-mareano-data.qmd) for issues found in the Mareano data set.
+ 
+## Distances to the Nearest Coastline
+
+To make the core/sample selection easy and effective, distances to the nearest Norwegian coastlines were calculated for the Mareano data.
+
+ * See the [Distance to Coast](./distance-to-coast.qmd) page for the result and methods for the distance calculation.
+
+## Extracted Tabular File
+
+A single tabular format file (.tsv.gz) was extracted and merged from all DB tables for the initial data exploration.
+
+ * See the [Data Export](./data-export.qmd) for the description of the file and for downloading.
+ 
