@@ -1,0 +1,149 @@
+[
+  {
+    "objectID": "incorrect-data.html",
+    "href": "incorrect-data.html",
+    "title": "Incorrect Data",
+    "section": "",
+    "text": "The page presents the invalid data identified during the database creation process. Because the database enforces stringent constraints on the data structure, the data must be corrected before it can be imported into the database tables."
+  },
+  {
+    "objectID": "data-export.html",
+    "href": "data-export.html",
+    "title": "Data Export",
+    "section": "",
+    "text": "The data file was created for the initial analysis using the Mareano data."
+  },
+  {
+    "objectID": "data-export.html#data-availability",
+    "href": "data-export.html#data-availability",
+    "title": "Data Export",
+    "section": "Data Availability",
+    "text": "Data Availability\nA tab-delimited file containing all major data from the database is available for download at the following location.\n\npilot_mareano.tsv.gz"
+  },
+  {
+    "objectID": "data-export.html#data-file-summary",
+    "href": "data-export.html#data-file-summary",
+    "title": "Data Export",
+    "section": "Data File Summary",
+    "text": "Data File Summary\nThe file pilot_mariano.tsv.gz is a denormalized (flat) export of the relational database, designed to facilitate immediate analysis without requiring complex SQL joins.\nEach row represents a single chemical measurement (e.g., Arsenic, Lead, TOC) for a specific sediment sample. To aid analysis, the following data has been pre-joined to every row:\n\nMetadata: Cruise information, core locations (including distance to coast), and sample depths.\nGranulometry: The grain size distribution (Clay, Silt, Sand, Gravel) for the sample has been pivoted from rows into columns."
+  },
+  {
+    "objectID": "data-export.html#column-definition",
+    "href": "data-export.html#column-definition",
+    "title": "Data Export",
+    "section": "Column Definition",
+    "text": "Column Definition\n\n\n\n\n\n\n\n\n\n\n\nColumn Name\nSource Table\nDescription\n\n\n\n\ncruise_id\nCruise / Core / Sample\nUnique Cruise Identifier\n\n\ncore_id\nCore / Sample\nUnique Core Identifier\n\n\nsample_id\nSample\nUnique Sample Identifier\n\n\ntype\nCruise\nCruise type (Mareano Cruise/Marine Basecamp Cruise)\n\n\nyear\nCruise\nYear of the cruise\n\n\ncore_name\nCore\nShort name of the core\n\n\nsampling_tool\nCore\nTool used for sampling\n\n\ndde\nCore\nDecimal Degrees East\n\n\nddn\nCore\nDecimal Degrees North\n\n\nmbsl\nCore\nMeters Below Sea Level\n\n\ndist_to_coast\nCore\nDistance to nearest Norwegian coastline (km)\n\n\nclay\nSediment (Pivoted)\nClay fraction (%)\n\n\nsilt\nSediment (Pivoted)\nSilt fraction (%)\n\n\nsand\nSediment (Pivoted)\nSand fraction (%)\n\n\ngravel\nSediment (Pivoted)\nGravel fraction (%)\n\n\ndepth_from\nSample\nTop depth of sample interval (cm)\n\n\ndepth_to\nSample\nBottom depth of sample interval (cm)\n\n\nelement\nParameter\nChemical element name\n\n\nparameter\nParameter / Sediment\nSpecific parameter measured (element name + method)\n\n\nvalue\nSediment\nMeasured value\n\n\nis_lld\nSediment\nFlag: 1 if value is Lower Level Detection (LLD)"
+  },
+  {
+    "objectID": "db-schema.html",
+    "href": "db-schema.html",
+    "title": "DB Schema",
+    "section": "",
+    "text": "The page shows the database schema diagram along with table definitions based on the Mareano dataset."
+  },
+  {
+    "objectID": "db-schema.html#db-schema-diagram",
+    "href": "db-schema.html#db-schema-diagram",
+    "title": "DB Schema",
+    "section": "DB Schema Diagram",
+    "text": "DB Schema Diagram\nThe proposed database design shown in the ER (Entity Relationship) diagram below contains five tables including three meta (entity) tables, one variable (look-up or reference) table, and one fact (measurement) table.\nThe columns with PK in the diagram indicate primary keys of the table, which guarantees unique identifications. All tables are connected by one-to-many relationships."
+  },
+  {
+    "objectID": "db-schema.html#cruise-table",
+    "href": "db-schema.html#cruise-table",
+    "title": "DB Schema",
+    "section": "Cruise Table",
+    "text": "Cruise Table\nThe cruise table includes Mareano cruise information and is a parent of the core table.\n\nCruise ID\nThe ID values in the cruise_id column are formulated as follows:\n\ncruise_id: MA-{year}-{cruise_no}\n\n\n\nTable Columns\n\n\n\n\n\n\nColumn Name\nColumn Type\nNA Allowed\n\n\n\n\ncruise_id\nTEXT\nFALSE\n\n\nsource\nTEXT\nTRUE\n\n\ntype\nTEXT\nTRUE\n\n\nyear\nINTEGER\nTRUE\n\n\nmonth\nINTEGER\nTRUE\n\n\nday\nINTEGER\nTRUE\n\n\ncruise_no\nINTEGER\nTRUE\n\n\nstart\nINTEGER\nTRUE\n\n\nend\nINTEGER\nTRUE\n\n\narea\nINTEGER\nTRUE\n\n\ncruise_no2\nINTEGER\nTRUE"
+  },
+  {
+    "objectID": "db-schema.html#core-table",
+    "href": "db-schema.html#core-table",
+    "title": "DB Schema",
+    "section": "Core Table",
+    "text": "Core Table\nThe core table includes sediment core information and is a parent of the sample table.\n\nCore ID\nThe ID values in the core_id column are formulated as follows:\n\ncore_id: {station_no}-{sampling_tool}-{core_name}\n\nThe {sampling_tool} part is three characters, padded with zeros, while the {core_name} part is two characters (or “00” if not available).\n\n\nTable Columns\n\n\n\n\n\n\nColumn Name\nColumn Type\nNA Allowed\n\n\n\n\ncruise_id\nTEXT\nFALSE\n\n\ncore_id\nTEXT\nFALSE\n\n\nstation_no\nTEXT\nTRUE\n\n\nsampling_tool\nTEXT\nTRUE\n\n\ntool_id\nTEXT\nTRUE\n\n\ncore_name\nTEXT\nTRUE\n\n\ndde\nREAL\nTRUE\n\n\nddn\nREAL\nTRUE\n\n\nmbsl\nREAL\nTRUE\n\n\ndist_to_coast\nINTEGER\nTRUE"
+  },
+  {
+    "objectID": "db-schema.html#sample-table",
+    "href": "db-schema.html#sample-table",
+    "title": "DB Schema",
+    "section": "Sample Table",
+    "text": "Sample Table\nThe sample table includes specific sediment sample intervals and is a child of the core table.\n\nSample ID\nThe ID values in the sample_id column are formulated as follows:\n\nsample_id: {core_name}-{depth_from}-{depth_to}\n\nAll parts are two characters, padded with zeros.\n\n\nTable Columns\n\n\n\n\n\n\nColumn Name\nColumn Type\nNA Allowed\n\n\n\n\ncruise_id\nTEXT\nFALSE\n\n\ncore_id\nTEXT\nFALSE\n\n\nsample_id\nTEXT\nFALSE\n\n\ndepth_from\nINTEGER\nTRUE\n\n\ndepth_to\nINTEGER\nTRUE\n\n\nsample_batch_id\nTEXT\nTRUE\n\n\nsample_id2\nTEXT\nTRUE"
+  },
+  {
+    "objectID": "db-schema.html#parameter-table",
+    "href": "db-schema.html#parameter-table",
+    "title": "DB Schema",
+    "section": "Parameter Table",
+    "text": "Parameter Table\nThe parameter table is a look-up table that contains parameter information for the sediment table.\n\nTable Columns\n\n\n\n\n\n\nColumn Name\nColumn Type\nNA Allowed\n\n\n\n\nparameter\nTEXT\nFALSE\n\n\nunit\nTEXT\nTRUE\n\n\nelement\nTEXT\nTRUE\n\n\nmethod1\nTEXT\nTRUE\n\n\nmethod2\nTEXT\nTRUE\n\n\ninstitute\nTEXT\nTRUE"
+  },
+  {
+    "objectID": "db-schema.html#sediment-table",
+    "href": "db-schema.html#sediment-table",
+    "title": "DB Schema",
+    "section": "Sediment Table",
+    "text": "Sediment Table\nThe sediment table contains measurements for all parameters.\n\nTable Columns\n\n\n\n\n\n\nColumn Name\nColumn Type\nNA Allowed\n\n\n\n\ncruise_id\nTEXT\nFALSE\n\n\ncore_id\nTEXT\nFALSE\n\n\nsample_id\nTEXT\nFALSE\n\n\nparameter\nTEXT\nFALSE\n\n\nvalue\nREAL\nTRUE\n\n\nis_lld\nINTEGER\nTRUE\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe is_lld column indicates if the value is LLD (Lower Level of Detection). For example, if the original value is “&lt;5”, the value is set to “5”, but is_lld is set to 1 (TRUE) instead of the default 0 (FALSE)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pilot DB with Mareano",
+    "section": "",
+    "text": "The site contains the initial version of the database design and its potential applications using the publicly available Mareano data set."
+  },
+  {
+    "objectID": "index.html#pipeline",
+    "href": "index.html#pipeline",
+    "title": "Pilot DB with Mareano",
+    "section": "Pipeline",
+    "text": "Pipeline\nThe database will be a central part of the project to identify background sediment cores/samples. From the database, dedicated APIs should be implemented to maintain the data with both read and write access, while exported tabular files should be used for data exploration and the main data analysis. As the goal of the project, the result should be submitted to EFSA by exporting the identified segments in the EFSA format."
+  },
+  {
+    "objectID": "index.html#source-data",
+    "href": "index.html#source-data",
+    "title": "Pilot DB with Mareano",
+    "section": "Source Data",
+    "text": "Source Data\n\nChemical data page at Mareano: Chemical data: NGU and IMR\n\nFrom the downloaded ods file, the data from INFO and INORGANIC sheets were used to create the pilot database."
+  },
+  {
+    "objectID": "index.html#database-design-and-creation",
+    "href": "index.html#database-design-and-creation",
+    "title": "Pilot DB with Mareano",
+    "section": "Database Design and Creation",
+    "text": "Database Design and Creation\nAfter creating the ER (Entity Relationship) diagram, the tables were created in a single SQLite file with five tables. All required data were extracted from the Mareano tabular file and imported to the associated tables.\n\nSee the DB Schema page for details of the DB architecture.\nSee the Incorrect Data for issues found in the Mareano data set."
+  },
+  {
+    "objectID": "index.html#distances-to-the-nearest-coastline",
+    "href": "index.html#distances-to-the-nearest-coastline",
+    "title": "Pilot DB with Mareano",
+    "section": "Distances to the Nearest Coastline",
+    "text": "Distances to the Nearest Coastline\nTo make the core/sample selection easy and effective, distances to the nearest Norwegian coastlines were calculated for the Mareano data.\n\nSee the Distance to Coast page for the result and methods for the distance calculation."
+  },
+  {
+    "objectID": "index.html#extracted-tabular-file",
+    "href": "index.html#extracted-tabular-file",
+    "title": "Pilot DB with Mareano",
+    "section": "Extracted Tabular File",
+    "text": "Extracted Tabular File\nA single tabular format file (.tsv.gz) was extracted and merged from all DB tables for the initial data exploration.\n\nSee the Data Export for the description of the file and for downloading."
+  },
+  {
+    "objectID": "distance-to-coast.html",
+    "href": "distance-to-coast.html",
+    "title": "Distance to Coast",
+    "section": "",
+    "text": "As the initial data analysis will be performed on the Mareano cores/samples located within Norwegian fjords and surrounding areas near the Norwegian coastline, the distances to the nearest coastline were calculated.\nThe distance data is available in the dist_to_coast column of the Core table."
+  },
+  {
+    "objectID": "distance-to-coast.html#sediment-core-locations",
+    "href": "distance-to-coast.html#sediment-core-locations",
+    "title": "Distance to Coast",
+    "section": "Sediment Core Locations",
+    "text": "Sediment Core Locations\n\nLocations with Calculated Distances\n\n\n\nCount of the Four Groups Separated by Distances\n\n\n\n\n\n\nDistance\n# Sediment Cores\n\n\n\n\n0 to 10km\n70\n\n\n10 to 30km\n26\n\n\n30 to 100km\n122\n\n\n≥100km\n165"
+  },
+  {
+    "objectID": "distance-to-coast.html#methods",
+    "href": "distance-to-coast.html#methods",
+    "title": "Distance to Coast",
+    "section": "Methods",
+    "text": "Methods\nCoastline data were derived from the Global Self-consistent, Hierarchical, High-resolution Geography (GSHHG) database. High-resolution shoreline polygons were extracted for the region covering the Norwegian mainland and the Svalbard archipelago. The coastline geometry was cleaned and filtered to ensure topological validity before calculation.\nTo ensure accurate measurements at high latitudes, where standard global projections (like Mercator) distort distances, all spatial data were projected to the ETRS89-extended Lambert Azimuthal Equal Area projection (EPSG:3035). This Coordinate Reference System is the standard for pan-European statistical mapping and minimizes distortion across the region. The shortest Euclidean distance from each sampling (core) site to the nearest Norwegian coastline geometry was then calculated in meters.\nThe calculation was performed using the sf library in R."
+  }
+]
