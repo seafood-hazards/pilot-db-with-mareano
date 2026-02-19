@@ -7,34 +7,6 @@
     "text": "The page presents the invalid data identified during the database creation process. Because the database enforces stringent constraints on the data structure, the data must be corrected before it can be imported into the database tables."
   },
   {
-    "objectID": "data-export.html",
-    "href": "data-export.html",
-    "title": "Data Export",
-    "section": "",
-    "text": "The data file was created for the initial analysis using the Mareano data."
-  },
-  {
-    "objectID": "data-export.html#data-availability",
-    "href": "data-export.html#data-availability",
-    "title": "Data Export",
-    "section": "Data Availability",
-    "text": "Data Availability\nA tab-delimited file containing all major data from the database is available for download at the following location.\n\npilot_mareano.tsv.gz"
-  },
-  {
-    "objectID": "data-export.html#data-file-summary",
-    "href": "data-export.html#data-file-summary",
-    "title": "Data Export",
-    "section": "Data File Summary",
-    "text": "Data File Summary\nThe file pilot_mariano.tsv.gz is a denormalized (flat) export of the relational database, designed to facilitate immediate analysis without requiring complex SQL joins.\nEach row represents a single chemical measurement (e.g., Arsenic, Lead, TOC) for a specific sediment sample. To aid analysis, the following data has been pre-joined to every row:\n\nMetadata: Cruise information, core locations (including distance to coast), and sample depths.\nGranulometry: The grain size distribution (Clay, Silt, Sand, Gravel) for the sample has been pivoted from rows into columns."
-  },
-  {
-    "objectID": "data-export.html#column-definition",
-    "href": "data-export.html#column-definition",
-    "title": "Data Export",
-    "section": "Column Definition",
-    "text": "Column Definition\n\n\n\n\n\n\n\n\n\n\n\nColumn Name\nSource Table\nDescription\n\n\n\n\ncruise_id\nCruise / Core / Sample\nUnique Cruise Identifier\n\n\ncore_id\nCore / Sample\nUnique Core Identifier\n\n\nsample_id\nSample\nUnique Sample Identifier\n\n\ntype\nCruise\nCruise type (Mareano Cruise/Marine Basecamp Cruise)\n\n\nyear\nCruise\nYear of the cruise\n\n\ncore_name\nCore\nShort name of the core\n\n\nsampling_tool\nCore\nTool used for sampling\n\n\ndde\nCore\nDecimal Degrees East\n\n\nddn\nCore\nDecimal Degrees North\n\n\nmbsl\nCore\nMeters Below Sea Level\n\n\ndist_to_coast\nCore\nDistance to nearest Norwegian coastline (km)\n\n\nclay\nSediment (Pivoted)\nClay fraction (%)\n\n\nsilt\nSediment (Pivoted)\nSilt fraction (%)\n\n\nsand\nSediment (Pivoted)\nSand fraction (%)\n\n\ngravel\nSediment (Pivoted)\nGravel fraction (%)\n\n\ndepth_from\nSample\nTop depth of sample interval (cm)\n\n\ndepth_to\nSample\nBottom depth of sample interval (cm)\n\n\nelement\nParameter\nChemical element name\n\n\nparameter\nParameter / Sediment\nSpecific parameter measured (element name + method)\n\n\nvalue\nSediment\nMeasured value\n\n\nis_lld\nSediment\nFlag: 1 if value is Lower Level Detection (LLD)"
-  },
-  {
     "objectID": "db-schema.html",
     "href": "db-schema.html",
     "title": "DB Schema",
@@ -124,6 +96,34 @@
     "title": "Pilot DB with Mareano",
     "section": "Extracted Tabular File",
     "text": "Extracted Tabular File\nA single tabular format file (.tsv.gz) was extracted and merged from all DB tables for the initial data exploration.\n\nSee the Data Export for the description of the file and for downloading."
+  },
+  {
+    "objectID": "data-export.html",
+    "href": "data-export.html",
+    "title": "Data Export",
+    "section": "",
+    "text": "The data file was created for the initial analysis using the Mareano data."
+  },
+  {
+    "objectID": "data-export.html#data-availability",
+    "href": "data-export.html#data-availability",
+    "title": "Data Export",
+    "section": "Data Availability",
+    "text": "Data Availability\nA tab-delimited file containing all major data from the database is available for download at the following location.\n\npilot_mareano.tsv.gz"
+  },
+  {
+    "objectID": "data-export.html#data-file-summary",
+    "href": "data-export.html#data-file-summary",
+    "title": "Data Export",
+    "section": "Data File Summary",
+    "text": "Data File Summary\nThe file pilot_mareano.tsv.gz is a denormalized (flat) export of the relational database, designed to facilitate immediate analysis without requiring complex SQL joins.\nEach row represents a single chemical measurement (e.g., Arsenic, Lead, TOC) for a specific sediment sample. To aid analysis, the following data has been pre-joined to every row:\n\nMetadata: Cruise information, core locations (including distance to coast), and sample depths.\nGranulometry: The grain size distribution (Clay, Silt, Sand, Gravel) for the sample has been pivoted from rows into columns."
+  },
+  {
+    "objectID": "data-export.html#column-definition",
+    "href": "data-export.html#column-definition",
+    "title": "Data Export",
+    "section": "Column Definition",
+    "text": "Column Definition\n\n\n\n\n\n\n\n\n\n\n\nColumn Name\nSource Table\nDescription\n\n\n\n\ncruise_id\nCruise / Core / Sample\nUnique Cruise Identifier\n\n\ncore_id\nCore / Sample\nUnique Core Identifier\n\n\nsample_id\nSample\nUnique Sample Identifier\n\n\ntype\nCruise\nCruise type (Mareano Cruise/Marine Basecamp Cruise)\n\n\nyear\nCruise\nYear of the cruise\n\n\ncore_name\nCore\nShort name of the core\n\n\nsampling_tool\nCore\nTool used for sampling\n\n\ndde\nCore\nDecimal Degrees East\n\n\nddn\nCore\nDecimal Degrees North\n\n\nmbsl\nCore\nMeters Below Sea Level\n\n\ndist_to_coast\nCore\nDistance to nearest Norwegian coastline (km)\n\n\nclay\nSediment (Pivoted)\nClay fraction (%)\n\n\nsilt\nSediment (Pivoted)\nSilt fraction (%)\n\n\nsand\nSediment (Pivoted)\nSand fraction (%)\n\n\ngravel\nSediment (Pivoted)\nGravel fraction (%)\n\n\ndepth_from\nSample\nTop depth of sample interval (cm)\n\n\ndepth_to\nSample\nBottom depth of sample interval (cm)\n\n\nelement\nParameter\nChemical element name\n\n\nparameter\nParameter / Sediment\nSpecific parameter measured (element name + method)\n\n\nvalue\nSediment\nMeasured value\n\n\nis_lld\nSediment\nFlag: 1 if value is Lower Level Detection (LLD)"
   },
   {
     "objectID": "distance-to-coast.html",
