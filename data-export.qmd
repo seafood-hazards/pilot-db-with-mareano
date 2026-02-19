@@ -13,7 +13,7 @@ A tab-delimited file containing all major data from the database is available fo
 
 ## Data File Summary
 
-The file `pilot_mariano.tsv.gz` is a denormalized (flat) export of the relational database, designed to facilitate immediate analysis without requiring complex SQL joins.
+The file `pilot_mareano.tsv.gz` is a denormalized (flat) export of the relational database, designed to facilitate immediate analysis without requiring complex SQL joins.
 
 Each row represents a single **chemical measurement** (e.g., Arsenic, Lead, TOC) for a specific sediment sample. To aid analysis, the following data has been pre-joined to every row:
 
