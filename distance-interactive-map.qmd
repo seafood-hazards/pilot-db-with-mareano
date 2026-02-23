@@ -17,11 +17,12 @@ The map below displays the spatial distribution of sediment cores. The markers a
 
 **How to use this map:**
 
-*   **Filter** the data by toggling distance categories in the top-right menu (e.g., uncheck boxes to hide specific ranges).
 *   **Zoom and Pan** to explore specific coastal areas or offshore regions.
-*   **Hover** over a point to quickly identify the **Cruise ID** and **Core ID**.
-*   **Click** on a marker to view detailed metadata, including exact coordinates and distance to shore (in km).
+*   **Click the Globe icon <i class="fas fa-earth-europe"></i> ** to reset the view.
+*   **Filter** the data by toggling distance categories in the top-right menu (e.g., uncheck boxes to hide specific ranges).
 *   Use the **Legend** in the bottom right to interpret the color coding.
+*   **Hover** over a point to quickly identify the **Cruise ID** and **Core ID**.
+*   **Click** on a marker to view exact coordinates and distance to shore (in km).
 
 ```{r}
 #| column: page       
@@ -35,37 +36,34 @@ library(sf)
 # 1. Load Data
 points_web <- readRDS(".data/points_web.Rds")
 
-# 2. Palette
+# 2. Define Default View (So we can use it twice)
+# Adjust these to your liking
+home_lat <- 68
+home_lng <- 15
+home_zoom <- 4
+
+# 3. Create Palette
 pal <- colorFactor(palette = "turbo", domain = points_web$Distance)
 
-# 3. Initialize the Map
-# We start with just the base tiles and the view
-map <- leaflet() %>%
+# 4. Initialize Map
+map <- leaflet(points_web) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  # Focus on Norway (excluding Russia/Greenland)
-  setView(lng = 15, lat = 68, zoom = 4) 
+  setView(lng = home_lng, lat = home_lat, zoom = home_zoom)
 
-# 4. Loop to Add Points by Group
-# Get the list of unique categories (e.g., "0 to 10km", "≥100km")
+# 5. Add Points (Group Loop)
 dist_groups <- levels(points_web$Distance)
 
-for(group_name in dist_groups) {
-  
-  # Filter data for this specific group
-  data_subset <- points_web[points_web$Distance == group_name, ]
-  
-  # Add markers for this group ONLY
+for(group in dist_groups) {
+  data_subset <- points_web[points_web$Distance == group, ]
   map <- map %>%
     addCircleMarkers(
       data = data_subset,
-      group = group_name,  # <--- THIS IS KEY: Assigns points to a toggleable group
+      group = group,
       radius = 6,
-      color = pal(group_name),     # Use the specific color for this group
-      fillColor = pal(group_name),
+      color = ~pal(group),
+      fillColor = ~pal(group),
       fillOpacity = 0.7,
       weight = 1,
-      
-      # Popup/Label logic
       label = ~paste0("Cruise: ", cruise_id, ", Core: ", core_id),
       popup = ~paste0(
         "<strong>Cruise ID:</strong> ", cruise_id, "<br>",
@@ -77,19 +75,25 @@ for(group_name in dist_groups) {
     )
 }
 
-# 5. Add the Control Box (Checkboxes) & Legend
+# 6. Add Controls & The Home Button
 map %>%
   addLayersControl(
-    overlayGroups = dist_groups, # Creates checkboxes for our groups
-    options = layersControlOptions(collapsed = FALSE) # Keep menu open
+    overlayGroups = dist_groups,
+    options = layersControlOptions(collapsed = FALSE)
   ) %>%
   addLegend(
     position = "bottomright",
     pal = pal,
-    values = points_web$Distance, # Use full data for legend so all colors show
+    values = ~Distance,
     title = "Distance to Coast",
     opacity = 1
-  )
-
+  ) %>%
+  # --- THE HOME BUTTON LOGIC ---
+  # This adds a generic button to the toolbar
+  addEasyButton(easyButton(
+    icon = "fa-earth-europe",  # FontAwesome globe icon
+    title = "Reset View",
+    onClick = JS(paste0("function(btn, map){ map.setView([", home_lat, ",", home_lng, "], ", home_zoom, "); }"))
+  ))
 
 ```
