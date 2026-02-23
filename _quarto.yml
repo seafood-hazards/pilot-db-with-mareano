@@ -25,6 +25,7 @@ website:
 
 format:
   html:
+    include-in-header: header.html
     theme:
       - cosmo
       - brand
