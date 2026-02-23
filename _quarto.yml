@@ -15,7 +15,11 @@ website:
           - text: "Incorrect Data"
             href: incorrect-data.qmd
       - text: "Distance to Coast"
-        href: distance-to-coast.qmd
+        menu:
+          - text: "Distance Calculation"
+            href: distance-to-coast.qmd
+          - text: "Interactive Map"
+            href: distance-interactive-map.qmd
       - text: "Data Export"
         href: data-export.qmd
 

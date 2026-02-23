@@ -27,7 +27,8 @@ After creating the ER (Entity Relationship) diagram, the tables were created in 
 
 To make the core/sample selection easy and effective, distances to the nearest Norwegian coastlines were calculated for the Mareano data.
 
- * See the [Distance to Coast](./distance-to-coast.qmd) page for the result and methods for the distance calculation.
+ * See the [Distance Calculation](./distance-to-coast.qmd) page for the result and methods for the distance calculation.
+ * See the [Interactive Map](./distance-interactive-map.qmd) page for an interactive map of core locations.
 
 ## Extracted Tabular File
 
