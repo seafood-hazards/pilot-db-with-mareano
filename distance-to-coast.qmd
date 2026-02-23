@@ -1,5 +1,5 @@
 ---
-title: "Distance to Coast"
+title: "Distance Calculation"
 subtitle: Distance calculation to the nearest Norwegian coastline from core locations 
 ---
 

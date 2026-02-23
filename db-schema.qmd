@@ -27,17 +27,30 @@ The ID values in the `cruise_id` column are formulated as follows:
 library(tibble)
 
 cruise_tbl <- tibble(
-  `Column Name` = c(
+  `Name` = c(
     "cruise_id", "source", "type", "year", "month", "day",
     "cruise_no", "start", "end", "area", "cruise_no2"
   ),
-  `Column Type` = c(
+  `Data Type` = c(
     "TEXT", "TEXT", "TEXT", "INTEGER", "INTEGER", "INTEGER",
     "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER"
   ),
   `NA Allowed` = c(
     FALSE, TRUE, TRUE, TRUE, TRUE, TRUE,
     TRUE, TRUE, TRUE, TRUE, TRUE
+  ),
+  `Description` = c(
+    "Primary Key. Unique cruise identifier (e.g., MA-2003-209).",
+    "Data source (Mareano).",
+    "Cruise type (Mareano Cruise/Marine Basecamp Cruise).",
+    "Year of the cruise.",
+    "Month of the cruise (Not used).",
+    "Day of the cruise start (Not used).",
+    "Cruise number.",
+    "Start year.",
+    "End year.",
+    "Survey area.",
+    "Alternative cruise number."
   )
 )
 cruise_tbl
@@ -59,17 +72,29 @@ The {sampling_tool} part is three characters, padded with zeros, while the {core
 ### Table Columns
 ``` {r}
 core_tbl <- tibble(
-  `Column Name` = c(
+  `Name` = c(
     "cruise_id", "core_id", "station_no", "sampling_tool",
     "tool_id", "core_name", "dde", "ddn", "mbsl", "dist_to_coast"
   ),
-  `Column Type` = c(
+  `Data Type` = c(
     "TEXT", "TEXT", "TEXT", "TEXT",
     "TEXT", "TEXT", "REAL", "REAL", "REAL", "INTEGER"
   ),
   `NA Allowed` = c(
     FALSE, FALSE, TRUE, TRUE,
     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE
+  ),
+  `Description` = c(
+    "Foreign Key to Cruise table.",
+    "Primary Key. Unique core identifier (e.g., R0625-BC-000-c1).",
+    "Station number.",
+    "Sampling tool code (BC, MC, GR).",
+    "Specific tool identifier.",
+    "Short core name.",
+    "Longitude (Decimal Degrees East).",
+    "Latitude (Decimal Degrees North).",
+    "Water depth (Meters Below Sea Level).",
+    "Distance to the nearest Norwegian coastline (km)."
   )
 )
 core_tbl
@@ -90,12 +115,12 @@ All parts are two characters, padded with zeros.
 ### Table Columns
 ``` {r}
 sample_tbl <- tibble(
-  `Column Name` = c(
+  `Name` = c(
     "cruise_id", "core_id", "sample_id",
     "depth_from", "depth_to",
     "sample_batch_id", "sample_id2"
   ),
-  `Column Type` = c(
+  `Data Type` = c(
     "TEXT", "TEXT", "TEXT",
     "INTEGER", "INTEGER",
     "TEXT", "TEXT"
@@ -104,6 +129,15 @@ sample_tbl <- tibble(
     FALSE, FALSE, FALSE,
     TRUE, TRUE,
     TRUE, TRUE
+  ),
+  `Description` = c(
+    "Foreign Key to Cruise table.",
+    "Foreign Key to Core table.",
+    "Primary Key. Unique sample identifier (e.g., c1_00-02).",
+    "Top depth of the sample interval (cm).",
+    "Bottom depth of the sample interval (cm).",
+    "Laboratory batch identifier.",
+    "Alternative sample identifier."
   )
 )
 sample_tbl
@@ -116,17 +150,25 @@ The parameter table is a look-up table that contains parameter information for t
 ### Table Columns
 ``` {r}
 parameter_tbl <- tibble(
-  `Column Name` = c(
+  `Name` = c(
     "parameter", "unit", "element",
     "method1", "method2", "institute"
   ),
-  `Column Type` = c(
+  `Data Type` = c(
     "TEXT", "TEXT", "TEXT",
     "TEXT", "TEXT", "TEXT"
   ),
   `NA Allowed` = c(
     FALSE, TRUE, TRUE,
     TRUE, TRUE, TRUE
+  ),
+  `Description` = c(
+    "Primary Key. Name of the measured parameter (e.g., Se, Cd_a, Si_p).",
+    "Unit of measurement (e.g., mg/kg, %).",
+    "Chemical element (e.g., Selenium, Cadmium).",
+    "Primary analytical method.",
+    "Secondary analytical method.",
+    "Institute responsible for the analysis."
   )
 )
 parameter_tbl
@@ -139,17 +181,25 @@ The sediment table contains measurements for all parameters.
 ### Table Columns
 ``` {r}
 sediment_tbl <- tibble(
-  `Column Name` = c(
+  `Name` = c(
     "cruise_id", "core_id", "sample_id",
     "parameter", "value", "is_lld"
   ),
-  `Column Type` = c(
+  `Data Type` = c(
     "TEXT", "TEXT", "TEXT",
     "TEXT", "REAL", "INTEGER"
   ),
   `NA Allowed` = c(
     FALSE, FALSE, FALSE,
     FALSE, TRUE, TRUE
+  ),
+  `Description` = c(
+    "Foreign Key to Cruise table.",
+    "Foreign Key to Core table.",
+    "Foreign Key to Sample table.",
+    "Foreign Key to Parameter table.",
+    "Measured value.",
+    "Flag: 1 if value is Lower Level Detection (LLD), 0 otherwise."
   )
 )
 sediment_tbl
