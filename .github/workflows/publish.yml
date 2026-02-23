@@ -34,7 +34,9 @@ jobs:
             libudunits2-dev \
             libtiff5-dev \
             libcairo2-dev \
-            libxml2-dev
+            libxml2-dev \
+            libcurl4-openssl-dev \
+            libnode-dev
 
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
