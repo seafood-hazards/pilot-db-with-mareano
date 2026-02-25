@@ -8,7 +8,7 @@ The site contains the initial version of the database design and its potential a
 ## Pipeline
 The database will be a central part of the project to identify background sediment cores/samples. From the database, dedicated APIs should be implemented to maintain the data with both read and write access, while exported tabular files should be used for data exploration and the main data analysis. As the goal of the project, the result should be submitted to EFSA by exporting the identified segments in the EFSA format.
 
-![](./image/mareano_pilot.png)
+![](./image/mareano_pilot.png){.zoomable}
 
 ## Source Data
 
@@ -21,7 +21,7 @@ The database will be a central part of the project to identify background sedime
 After creating the ER (Entity Relationship) diagram, the tables were created in a single SQLite file with five tables. All required data were extracted from the Mareano tabular file and imported to the associated tables.
 
  * See the [DB Schema](./db-schema.qmd) page for details of the DB architecture.
- * See the [Incorrect Data](./incorrect-data.qmd) for issues found in the Mareano data set.
+ * See the [Invalid Data](./invalid-data.qmd) for issues found in the Mareano data set.
  
 ## Distances to the Nearest Coastline
 
