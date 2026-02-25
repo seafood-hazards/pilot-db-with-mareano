@@ -36,8 +36,7 @@ library(sf)
 # 1. Load Data
 points_web <- readRDS(".data/points_web.Rds")
 
-# 2. Define Default View (So we can use it twice)
-# Adjust these to your liking
+# 2. Define Default View 
 home_lat <- 68
 home_lng <- 15
 home_zoom <- 4
@@ -50,8 +49,8 @@ map <- leaflet(points_web) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   setView(lng = home_lng, lat = home_lat, zoom = home_zoom)
 
-# 5. Add Points (Group Loop)
-dist_groups <- levels(points_web$Distance)
+# 5. Add Points 
+dist_groups <- rev(levels(points_web$Distance))
 
 for(group in dist_groups) {
   data_subset <- points_web[points_web$Distance == group, ]
@@ -88,10 +87,8 @@ map %>%
     title = "Distance to Coast",
     opacity = 1
   ) %>%
-  # --- THE HOME BUTTON LOGIC ---
-  # This adds a generic button to the toolbar
   addEasyButton(easyButton(
-    icon = "fa-earth-europe",  # FontAwesome globe icon
+    icon = "fa-earth-europe",
     title = "Reset View",
     onClick = JS(paste0("function(btn, map){ map.setView([", home_lat, ",", home_lng, "], ", home_zoom, "); }"))
   ))
