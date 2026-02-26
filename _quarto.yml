@@ -28,6 +28,11 @@ website:
             href: efsa-format.qmd
           - text: "EFSA Submission"
             href: efsa-submission.qmd
+      - text: "Tools"
+        menu:
+          - text: "Pilot DB Viewer"
+            href: pilot-db-viewer.qmd
+
 format:
   html:
     include-in-header: header.html
