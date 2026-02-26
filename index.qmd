@@ -40,3 +40,7 @@ Data can be exported for both exploration and submission.
 - See the [Export to Tabular File](./data-export.qmd) page for a description of a single tabular file format (`.tsv.gz`) extracted and merged from all database tables for data exploration.
 - See the [EFSA Format](./efsa-format.qmd) page for a description of the EFSA submission file structure.
 - See the [EFSA Submission](./efsa-format.qmd) page for the mapping between the database fields and the EFSA submission format.
+
+## Tools
+
+- See the [Pilot DB Viewer](./pilot-db-viewer.qmd) page for a read-only view of the pilot database.
