@@ -40,7 +40,11 @@ cruise_correction_rules <- tribble(
 
 ```
 
-## Invalid Full IDs — examples
+## Invalid Full IDs
+
+::: {.callout-warning}
+Several Full IDs were generated with incorrect formats, wrong cruise numbers, or invalid core identifiers. These must be corrected before import.
+:::
 
   * **Excel Sheet**: `INORGANIC`
   * **Range**: Column A
@@ -53,7 +57,11 @@ invalid_full_ids_examples %>%
 ```
 
 
-## Sample and Sediment — row duplication & incorrect intervals
+## Sample and Sediment
+
+::: {.callout-warning}
+The dataset contains duplicate sample rows and several depth intervals that do not match expected layer boundaries. These issues require deletion or interval correction.
+:::
 
   * **Excel Sheet**: `INORGANIC`
   * **Ranges for duplication**: 
@@ -72,7 +80,11 @@ sample_sediment_corrections %>%
   kable(caption = "Rules applied to Sample and Sediment data.")
 ```
 
-## Cruise Information — row duplication
+## Cruise Information
+
+::: {.callout-warning}
+A duplicated cruise entry appears in the metadata and must be removed to maintain unique cruise identifiers.
+:::
 
   * **Excel Sheet**: `INFO`
   * **Range**: P83:V83
@@ -85,7 +97,11 @@ cruise_correction_rules %>%
 ```
 
 
-## Element Definitions — missing entry
+## Element Definitions
+
+::: {.callout-warning}
+The element list is missing a required Sulfur entry, which must be added for completeness.
+:::
 
   * **Excel Sheet**: `INFO`
   * **Range**: A141:G141
