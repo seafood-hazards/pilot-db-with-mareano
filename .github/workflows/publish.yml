@@ -37,8 +37,8 @@ jobs:
             libxml2-dev \
             libcurl4-openssl-dev \
             libnode-dev \
-            harfbuzz-devel \
-            fribidi-devel
+            libharfbuzz-dev \
+            libfribidi-dev
 
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
