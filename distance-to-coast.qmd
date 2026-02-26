@@ -9,10 +9,13 @@ The distance data is available in the `dist_to_coast` column of the [Core](db-sc
 
 ## Sediment Core Locations
 
-### Locations with Calculated Distances
+### Distance Calculation
 ![](./image/dist_to_coast.png){.zoomable width=80%}
 
-### Count of the Four Groups Separated by Distances
+### Count of Four Groups
+
+The table summarises how many observations fall into each of the four groups, broken down by distance categories.
+
 ```{r}
 library(tibble)
 
