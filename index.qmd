@@ -11,7 +11,7 @@ The database will be a central component of the project for identifying backgrou
 
 As the final goal of the project, the results should be submitted to EFSA by exporting the identified segments in the required EFSA format.
 
-![](./image/mareano_pilot.png){.zoomable}
+![](./image/mareano_pilot.webp){.zoomable}
 
 ## Source Data
 
@@ -21,7 +21,7 @@ From the downloaded `ods` file, the data from the `INFO` and `INORGANIC` sheets 
 
 ## Database Design and Creation
 
-After creating the ER (Entity–Relationship) diagram, the tables were implemented in a single SQLite file containing five tables. All required data were extracted from the Mareano tabular file and imported into the corresponding tables.
+After creating the ER (Entity–Relationship) diagram, the tables were implemented in a single SQLite file containing six tables. All required data were extracted from the Mareano tabular file and imported into the corresponding tables.
 
 - See the [DB Schema](./db-schema.qmd) page for details of the database architecture.
 - See the [Invalid Data](./invalid-data.qmd) page for issues identified in the Mareano dataset.

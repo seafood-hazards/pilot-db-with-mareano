@@ -6,11 +6,16 @@ subtitle: A proposed database design based on Mareano Chemical Data
 The page shows the database schema diagram along with table definitions based on the Mareano dataset.
 
 ## DB Schema Diagram
-The proposed database design shown in the ER (Entity Relationship) diagram below contains five tables including three meta (entity) tables, one variable (look-up or reference) table, and one fact (measurement) table.
+The proposed database design shown in the ER (Entity Relationship) diagram below contains six tables including three meta (entity) tables, one variable (look-up or reference) table, one fact (measurement) table, and one mixed meta and measurement table.
 
-The columns with `PK` in the diagram indicate primary keys of the table, which guarantees unique identifications. All tables are connected by one-to-many relationships.
+The columns with `PK` in the diagram indicate primary keys of the table, which guarantees unique identifications. All tables are connected by one-to-many relationships, except for the LLD table (lld). This table is optional for the parameter table but forms a many-to-many relationship with the sample table.
 
-![](./image/mareano_db.png){.zoomable}
+![](./image/mareano_db.webp){.zoomable}
+
+
+::: {.callout-warning}
+A direct SQL join must not be performed between the lld and sample tables due to their many-to-many relationship.
+:::
 
 ## Cruise Table
 
@@ -28,32 +33,46 @@ library(tibble)
 
 cruise_tbl <- tibble(
   `Name` = c(
-    "cruise_id", "source", "type", "year", "month", "day",
-    "cruise_no", "start", "end", "area", "cruise_no2"
+    "cruise_id", "source", "cruise_type", "year",
+    "cruise_no", "start", "end", 
+    "start_year", "start_month", "start_day", 
+    "end_year", "end_month", "end_day", 
+    "area", "cruise_no2"
   ),
   `Data Type` = c(
-    "TEXT", "TEXT", "TEXT", "INTEGER", "INTEGER", "INTEGER",
-    "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER"
+    "TEXT", "TEXT", "TEXT", "INTEGER", "INTEGER", "TEXT", "TEXT",
+    "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER",
+    "INTEGER", "INTEGER"
+  ),
+  `PK` = c(
+    "✓", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
   ),
   `NA Allowed` = c(
-    FALSE, TRUE, TRUE, TRUE, TRUE, TRUE,
-    TRUE, TRUE, TRUE, TRUE, TRUE
+    FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 
+    TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
+    TRUE, TRUE
   ),
   `Description` = c(
     "Primary Key. Unique cruise identifier (e.g., MA-2003-209).",
     "Data source (Mareano).",
     "Cruise type (Mareano Cruise/Marine Basecamp Cruise).",
     "Year of the cruise.",
-    "Month of the cruise (Not used).",
-    "Day of the cruise start (Not used).",
     "Cruise number.",
-    "Start year.",
-    "End year.",
+    "Start date of the cruise",
+    "End date of the cruise",
+    "Start year of the cruise",
+    "Start month of the cruise",
+    "Start day of the cruise",
+    "End year of the cruise",
+    "End month of the cruise",
+    "End day of the cruise",
     "Survey area.",
     "Alternative cruise number."
   )
 )
+
 cruise_tbl
+
 ```
 
 
@@ -80,12 +99,15 @@ core_tbl <- tibble(
     "TEXT", "TEXT", "TEXT", "TEXT",
     "TEXT", "TEXT", "REAL", "REAL", "REAL", "INTEGER"
   ),
+  `PK` = c(
+    "✓", "✓", "", "", "", "", "", "", "", ""
+  ),
   `NA Allowed` = c(
     FALSE, FALSE, TRUE, TRUE,
-    TRUE, TRUE, TRUE, TRUE, TRUE, TRUE
+    TRUE, TRUE, FALSE, FALSE, TRUE, TRUE
   ),
   `Description` = c(
-    "Foreign Key to Cruise table.",
+    "Primary Key. Foreign Key to Cruise table.",
     "Primary Key. Unique core identifier (e.g., R0625-BC-000-c1).",
     "Station number.",
     "Sampling tool code (BC, MC, GR).",
@@ -97,7 +119,9 @@ core_tbl <- tibble(
     "Distance to the nearest Norwegian coastline (km)."
   )
 )
+
 core_tbl
+
 ```
 
 ## Sample Table
@@ -118,21 +142,24 @@ sample_tbl <- tibble(
   `Name` = c(
     "cruise_id", "core_id", "sample_id",
     "depth_from", "depth_to",
-    "sample_batch_id", "sample_id2"
+    "batch_id", "sample_id2"
   ),
   `Data Type` = c(
     "TEXT", "TEXT", "TEXT",
     "INTEGER", "INTEGER",
     "TEXT", "TEXT"
   ),
+  `PK` = c(
+    "✓", "✓", "✓", "", "", "", ""
+  ),
   `NA Allowed` = c(
     FALSE, FALSE, FALSE,
-    TRUE, TRUE,
+    FALSE, FALSE,
     TRUE, TRUE
   ),
   `Description` = c(
-    "Foreign Key to Cruise table.",
-    "Foreign Key to Core table.",
+    "Primary Key. Foreign Key to Cruise table.",
+    "Primary Key. Foreign Key to Core table.",
     "Primary Key. Unique sample identifier (e.g., c1_00-02).",
     "Top depth of the sample interval (cm).",
     "Bottom depth of the sample interval (cm).",
@@ -140,7 +167,9 @@ sample_tbl <- tibble(
     "Alternative sample identifier."
   )
 )
+
 sample_tbl
+
 ```
 
 ## Parameter Table
@@ -158,12 +187,15 @@ parameter_tbl <- tibble(
     "TEXT", "TEXT", "TEXT",
     "TEXT", "TEXT", "TEXT"
   ),
+  `PK` = c(
+    "✓", "", "", "", "", ""
+  ),
   `NA Allowed` = c(
     FALSE, TRUE, TRUE,
     TRUE, TRUE, TRUE
   ),
   `Description` = c(
-    "Primary Key. Name of the measured parameter (e.g., Se, Cd_a, Si_p).",
+    "Primary Key. Name of the measured parameter (e.g., Se, Cd_a).",
     "Unit of measurement (e.g., mg/kg, %).",
     "Chemical element (e.g., Selenium, Cadmium).",
     "Primary analytical method.",
@@ -171,7 +203,9 @@ parameter_tbl <- tibble(
     "Institute responsible for the analysis."
   )
 )
+
 parameter_tbl
+
 ```
 
 ## Sediment Table
@@ -189,22 +223,59 @@ sediment_tbl <- tibble(
     "TEXT", "TEXT", "TEXT",
     "TEXT", "REAL", "INTEGER"
   ),
+  `PK` = c(
+    "✓", "✓", "✓", "✓", "", ""
+  ),
   `NA Allowed` = c(
     FALSE, FALSE, FALSE,
-    FALSE, TRUE, TRUE
+    FALSE, FALSE, FALSE
   ),
   `Description` = c(
-    "Foreign Key to Cruise table.",
-    "Foreign Key to Core table.",
-    "Foreign Key to Sample table.",
-    "Foreign Key to Parameter table.",
+    "Primary Key. Foreign Key to Cruise table.",
+    "Primary Key. Foreign Key to Core table.",
+    "Primary Key. Foreign Key to Sample table.",
+    "Primary Key. Foreign Key to Parameter table.",
     "Measured value.",
     "Flag: 1 if value is Lower Level Detection (LLD), 0 otherwise."
   )
 )
+
 sediment_tbl
+
 ```
 
 ::: {.callout-note}
 The is_lld column indicates if the value is LLD (Lower Level of Detection). For example, if the original value is "<5", the value is set to "5", but is_lld is set to 1 (TRUE) instead of the default 0 (FALSE).
 :::
+
+
+## LLD Table
+
+The lld table stores the Lower Level of Detection (LLD) values for measured elements, defined per sample batch.
+
+### Table Columns
+``` {r}
+lld_tbl <- tibble(
+  `Name` = c(
+    "batch_id", "parameter", "value"
+  ),
+  `Data Type` = c(
+    "TEXT", "TEXT", "REAL"
+  ),
+  `PK` = c(
+    "✓", "✓", ""
+  ),
+  `NA Allowed` = c(
+    FALSE, FALSE, FALSE
+  ),
+  `Description` = c(
+    "Primary Key. Batch ID shared with Sample table.",
+    "Primary Key. Foreign Key to Parameter table.",
+    "LLD value."
+  )
+)
+
+lld_tbl
+
+```
+
