@@ -34,18 +34,23 @@ library(tibble)
 cruise_tbl <- tibble(
   `Name` = c(
     "cruise_id", "source", "cruise_type", "year",
-    "cruise_no", "start", "end", "area", "cruise_no2"
+    "cruise_no", "start", "end", 
+    "start_year", "start_month", "start_day", 
+    "end_year", "end_month", "end_day", 
+    "area", "cruise_no2"
   ),
   `Data Type` = c(
-    "TEXT", "TEXT", "TEXT", "INTEGER", "INTEGER", "TEXT",
-    "TEXT", "INTEGER", "INTEGER"
+    "TEXT", "TEXT", "TEXT", "INTEGER", "INTEGER", "TEXT", "TEXT",
+    "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER",
+    "INTEGER", "INTEGER"
   ),
   `PK` = c(
-    "✓", "", "", "", "", "", "", "", ""
+    "✓", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
   ),
   `NA Allowed` = c(
-    FALSE, FALSE, FALSE, FALSE, TRUE, TRUE,
-    TRUE, TRUE, TRUE
+    FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, 
+    TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
+    TRUE, TRUE
   ),
   `Description` = c(
     "Primary Key. Unique cruise identifier (e.g., MA-2003-209).",
@@ -55,11 +60,19 @@ cruise_tbl <- tibble(
     "Cruise number.",
     "Start date of the cruise",
     "End date of the cruise",
+    "Start year of the cruise",
+    "Start month of the cruise",
+    "Start day of the cruise",
+    "End year of the cruise",
+    "End month of the cruise",
+    "End day of the cruise",
     "Survey area.",
     "Alternative cruise number."
   )
 )
+
 cruise_tbl
+
 ```
 
 
@@ -106,7 +119,9 @@ core_tbl <- tibble(
     "Distance to the nearest Norwegian coastline (km)."
   )
 )
+
 core_tbl
+
 ```
 
 ## Sample Table
@@ -152,7 +167,9 @@ sample_tbl <- tibble(
     "Alternative sample identifier."
   )
 )
+
 sample_tbl
+
 ```
 
 ## Parameter Table
@@ -186,7 +203,9 @@ parameter_tbl <- tibble(
     "Institute responsible for the analysis."
   )
 )
+
 parameter_tbl
+
 ```
 
 ## Sediment Table
@@ -220,7 +239,9 @@ sediment_tbl <- tibble(
     "Flag: 1 if value is Lower Level Detection (LLD), 0 otherwise."
   )
 )
+
 sediment_tbl
+
 ```
 
 ::: {.callout-note}
@@ -236,24 +257,24 @@ The lld table stores the Lower Level of Detection (LLD) values for measured elem
 ``` {r}
 lld_tbl <- tibble(
   `Name` = c(
-    "batch_id", "parameter", "value", "lld_type"
+    "batch_id", "parameter", "value"
   ),
   `Data Type` = c(
-    "TEXT", "TEXT", "REAL", "TEXT"
+    "TEXT", "TEXT", "REAL"
   ),
   `PK` = c(
-    "✓", "✓", "", ""
+    "✓", "✓", ""
   ),
   `NA Allowed` = c(
-    FALSE, FALSE, FALSE, FALSE
+    FALSE, FALSE, FALSE
   ),
   `Description` = c(
     "Primary Key. Batch ID shared with Sample table.",
     "Primary Key. Foreign Key to Parameter table.",
-    "LLD value.",
-    "LLD type (lld, range_low, range_high)."
+    "LLD value."
   )
 )
+
 lld_tbl
 
 ```

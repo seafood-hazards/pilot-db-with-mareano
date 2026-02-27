@@ -29,7 +29,7 @@ table {
 #| output: false
 
 # 1. Define the URL for the SQLite file
-db_url <- "https://github.com/seafood-hazards/pilot-db-with-mareano/releases/download/v0.1.0/pilot_mareano.sqlite"
+db_url <- "https://github.com/seafood-hazards/pilot-db-with-mareano/releases/download/v0.1.13/pilot_mareano.sqlite"
 local_db_name <- "pilot_mareano.sqlite"
 
 # 2. Download Logic
@@ -89,10 +89,14 @@ offset = (currentPage - 1) * pageSize
 data_paged = db.query(`SELECT * FROM "${selected_table}" LIMIT ${pageSize} OFFSET ${offset}`)
 
 // 8. Display Table
-// Note: The Checkboxes are hidden by the CSS block at the top of the file
 Inputs.table(data_paged, {
   layout: "auto",
-  rows: pageSize
+  rows: pageSize,
+  format: {
+    year: d3.format("d"),
+    start_year: d3.format("d"),
+    end_year: d3.format("d")
+  }
 })
 
 ```
