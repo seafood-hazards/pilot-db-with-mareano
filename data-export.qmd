@@ -32,7 +32,7 @@ exported_columns_tbl <- tibble(
     "cruise_id", "core_id", "sample_id", 
     
     # Cruise Metadata
-    "type", "year", 
+    "cruise_type", "year",
     
     # Core Metadata
     "core_name", "sampling_tool", "dde", "ddn", "mbsl", "dist_to_coast",
@@ -64,7 +64,7 @@ exported_columns_tbl <- tibble(
     "Clay fraction (%)", "Silt fraction (%)", "Sand fraction (%)", "Gravel fraction (%)",
     "Top depth of sample interval (cm)", "Bottom depth of sample interval (cm)",
     "Chemical element name", "Specific parameter measured (element name + method)", "Measured value", "Flag: 1 if value is Lower Level Detection (LLD)",
-    "LLD Value"
+    "Lower limits of detection (LLD) value"
   )
 )
 
