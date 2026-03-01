@@ -15,7 +15,7 @@ efsa_submission <- tribble(
   "envComp",          NA,              "Mandatory",  NA,         NA,                                "marine sediment", NA,
   "pristineLoc",      NA,              "Mandatory",  NA,     NA,                        "Yes",          NA,
   "sampleLocGC",      NA,              "Mandatory",  "Core",     "ddn + dde",                       NA,          NA,
-  "sampleLocCM",      NA,              "Mandatory",  "Core",     "(country) + (municipality)",                        NA,          "Yes",
+  "sampleLocCM",      NA,              "Mandatory",  "Core",     "country + municipality",                        NA,          NA,
   "sampleDate",       NA,              "Mandatory",  "Cruise",   "start_year + start_month + start_date",             NA,          NA,
   "traceElText",      NA,           "Mandatory",  "Parameter","symbol",                          NA,          NA,
   "traceElCode",      "Yes",              "Mandatory",  "Parameter",NA,                                NA,          NA,
@@ -80,15 +80,6 @@ efsa_submission <- efsa_submission_full %>%
 ```
 
 ## Data Mapping for Submission
-
-::: {.callout-note}
-### Note on Missing Mapping
-
-If table and column names appear in parentheses, the values are not yet available in the database but will be generated in future updates.
-
-:::
-
-
 ```{r}
 efsa_submission
 ```

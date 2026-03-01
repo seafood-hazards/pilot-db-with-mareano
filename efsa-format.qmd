@@ -200,10 +200,11 @@ methAn <- tibble::tibble(
 
 The details of EFSA submission and their objectives are described in this [call](https://www.efsa.europa.eu/en/call/call-data-determination-natural-background-concentrations-trace-elements-co-cu-i-mn-mo-se-or) from EFSA.
 
-- Natural background concentrations of trace elements (cobalt, copper, iodine, manganese, molybdenum, selenium or zinc)
-- Sampling should have been done within the last 15 years (2009 onwards)
-- Preferred samples are from pristine areas (areas not affected by point or diffuse sources of pollution)
-- Supporting metadata on porewater pH, texture (% clay <2 µm, % silt 2–63 µm, % sand >63 µm) and organic matter content (%) are highly appreciated
+*   **Data on** natural background concentrations of trace elements (cobalt, copper, iodine, manganese, molybdenum, selenium, and zinc)
+*   **Trace element concentrations** in marine sediment along the coasts of EU, EFTA, and EU candidate countries (including fjords and estuaries)
+*   **Samples collected** within the last 15 years (2009 to present)
+*   **Samples from** pristine areas (defined as areas unaffected by point or diffuse pollution sources)
+*   **Supporting metadata** regarding porewater pH, sediment texture (% clay <2 µm, % silt 2–63 µm, % sand >63 µm), and organic matter content (%)
 
 ## Column Format
 
