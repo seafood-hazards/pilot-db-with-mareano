@@ -14,10 +14,12 @@ website:
             href: db-schema.qmd
           - text: "Invalid Data"
             href: invalid-data.qmd
-      - text: "Distance to Coast"
+      - text: "Geospatial Analysis"
         menu:
-          - text: "Distance Calculation"
+          - text: "Distance to Coast"
             href: distance-to-coast.qmd
+          - text: "Location Names"
+            href: location-names.qmd
           - text: "Interactive Map"
             href: distance-interactive-map.qmd
       - text: "Data Export"

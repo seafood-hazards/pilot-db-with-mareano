@@ -1,6 +1,6 @@
 ---
 title: "Interactive Map of Core Locations"
-subtitle: Interactive map to view sediment core locations 
+subtitle: Interactive map to view sediment core locations with meta information
 ---
 
 ::: {.callout-note}
@@ -9,6 +9,11 @@ subtitle: Interactive map to view sediment core locations
 Calculated distances represent the shortest Euclidean path to the nearest coastline geometry (GSHHG dataset). 
 
 While the data is projected (EPSG:3035) to minimize distortion at high latitudes, please interpret these values as **estimates**. In areas with complex topography—such as narrow fjords or dense archipelagos—the resolution of the coastline vector data may result in minor deviations from real-world measurements.
+:::
+
+::: {.callout-note}
+### Note on Location Name Accuracy
+Location names from geographic coordinates are **algorithmic estimates** based on geometric proximity. They may differ from historical logbooks or specific political definitions of maritime borders.
 :::
 
 ## Interactive Map
@@ -22,7 +27,7 @@ The map below displays the spatial distribution of sediment cores. The markers a
 *   **Filter** the data by toggling distance categories in the top-right menu (e.g., uncheck boxes to hide specific ranges).
 *   Use the **Legend** in the bottom right to interpret the color coding.
 *   **Hover** over a point to quickly identify the **Cruise ID** and **Core ID**.
-*   **Click** on a marker to view exact coordinates and distance to shore (in km).
+*   **Click** on a marker to view exact coordinates, distance to shore (in km), and location names.
 
 ```{r}
 #| column: page       
@@ -69,7 +74,10 @@ for(group in dist_groups) {
         "<strong>Core ID:</strong> ", core_id, "<br>",
         "<strong>Latitude:</strong> ", round(ddn, 2), "<br>",
         "<strong>Longitude:</strong> ", round(dde, 2), "<br>",
-        "<strong>Distance:</strong> ", round(dist_to_coast, 1), " km"
+        "<strong>Distance to Coast:</strong> ", round(dist_to_coast, 1), " km", "<br>",
+        "<strong>Country:</strong> ", country, "<br>",
+        "<strong>Municipality:</strong> ", municipality, "<br>",
+        "<strong>Sea/Ocean Name:</strong> ", sea_name
       )
     )
 }
