@@ -14,7 +14,7 @@ website:
             href: db-schema.qmd
           - text: "Invalid Data"
             href: invalid-data.qmd
-      - text: "Geospatial Estimation"
+      - text: "Geospatial Analysis"
         menu:
           - text: "Distance to Coast"
             href: distance-to-coast.qmd
