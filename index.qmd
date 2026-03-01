@@ -26,12 +26,13 @@ After creating the ER (Entity–Relationship) diagram, the tables were implement
 - See the [DB Schema](./db-schema.qmd) page for details of the database architecture.
 - See the [Invalid Data](./invalid-data.qmd) page for issues identified in the Mareano dataset.
 
-## Distance to Coastline
+## Geospatial Estimation
 
-To facilitate efficient core and sample selection, distances to the nearest Norwegian coastline were calculated for the Mareano data.
+To facilitate efficient core and sample selection, distances to the nearest Norwegian coastline were calculated for the Mareano data. Also, 
 
-- See the [Distance Calculation](./distance-to-coast.qmd) page for the methods and results.
-- See the [Interactive Map](./distance-interactive-map.qmd) page for an interactive visualization of core locations.
+- See the [Distance Calculation](./distance-to-coast.qmd) page for the methods and results of distance calculation to the nearest coastline.
+- See the [Geospatial Estimation of Location Names](./location-names.qmd) page for the estimation of location names from geographic coordinates.
+- See the [Interactive Map](./distance-interactive-map.qmd) page for an interactive visualization of core locations with meta information.
 
 ## Data Export
 
