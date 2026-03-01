@@ -31,7 +31,7 @@ After creating the ER (Entity–Relationship) diagram, the tables were implement
 To facilitate efficient core and sample selection, distances to the nearest Norwegian coastline were calculated for the MAREANO data. In addition, the nearest country and municipality, as well as the sea and ocean names, were identified based on the core locations.
 
 - See the [Distance Calculation](./distance-to-coast.qmd) page for the methods and results of distance calculation to the nearest coastline.
-- See the [Geospatial Estimation of Location Names](./location-names.qmd) page for the estimation of location names from geographic coordinates.
+- See the [Location Names](./location-names.qmd) page for the estimation of location names from geographic coordinates.
 - See the [Interactive Map](./distance-interactive-map.qmd) page for an interactive visualization of core locations with meta information.
 
 ## Data Export

@@ -1,5 +1,5 @@
 ---
-title: "Geospatial Estimation of Location Names"
+title: "Estimation of Location Names"
 subtitle: "Estimation of location names from geographic coordinates"
 ---
 
