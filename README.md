@@ -26,11 +26,7 @@ renv::restore()
 
  4. Render the website:
 
-```R
-quarto render
-```
-
-Alternatively, you can use the ``Render Website`` option in RStudio. 
+Use the ``Render Website`` option in RStudio. 
 
 > [!Note]
 > The website deployed on GitHub Pages is automatically built using the same workflow and environment configuration.
