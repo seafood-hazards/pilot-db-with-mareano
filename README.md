@@ -10,12 +10,27 @@ This project is licensed under the [CC BY 4.0](https://creativecommons.org/licen
 ## Data source
 The original chemical data used in this project is available on the [Mareano Chemical Data](https://www.mareano.no/en/maps-and-data/chemical-data) page.
 
-## Development
-The website is automatically generated and deployed using a dedicated GitHub workflow, but it can also be build manually. The site is based on [Quarto](https://quarto.org/) using R, with dependent R packages managed by [renv](https://rstudio.github.io/renv/). The following commands set up an R environment for the project.
+## Reproducibility
+
+This project is designed to be fully reproducible. All required R package versions are recorded using [renv](https://rstudio.github.io/renv/), ensuring a consistent computational environment.
+
+To reproduce the analysis and website locally:
+
+ 1. Clone the repository
+ 2. Open the project in R
+ 3. Restore the package environment:
 
 ```R
-renv::activate()
-renv::update()
+renv::restore()
 ```
 
-Then, the easiest approach is to use Rstudio, which provides a ``Render Website`` option in the ``Build`` menu.
+ 4. Render the website:
+
+```R
+quarto render
+```
+
+Alternatively, you can use the ``Render Website`` option in RStudio. 
+
+> [!Note]
+> The website deployed on GitHub Pages is automatically built using the same workflow and environment configuration.
